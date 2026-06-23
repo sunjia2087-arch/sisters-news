@@ -1,0 +1,327 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #17202a;
+  background: #edf1f2;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background:
+    linear-gradient(180deg, #dfe9e7 0, #edf1f2 280px, #edf1f2 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  width: min(760px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 28px 24px 44px;
+}
+
+.topbar,
+.conversation-head,
+.playback,
+.time-row {
+  display: flex;
+  align-items: center;
+}
+
+.topbar {
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.date,
+.section-label,
+.episode-meta > p {
+  margin: 0;
+  color: #687579;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+h1,
+h2,
+p {
+  letter-spacing: 0;
+}
+
+h1 {
+  margin: 4px 0 0;
+  font-size: clamp(25px, 7vw, 34px);
+  line-height: 1.15;
+}
+
+.live-mark {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: #225f53;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.live-mark span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d94b3d;
+  box-shadow: 0 0 0 4px rgba(217, 75, 61, 0.14);
+}
+
+.audience-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 4px;
+  border: 1px solid #c9d2d3;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.audience {
+  min-height: 58px;
+  border: 0;
+  border-radius: 6px;
+  color: #536064;
+  background: transparent;
+}
+
+.audience strong,
+.audience span {
+  display: block;
+}
+
+.audience strong {
+  font-size: 16px;
+}
+
+.audience span {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.audience.active {
+  color: #fff;
+  background: #226a5c;
+  box-shadow: 0 2px 8px rgba(24, 62, 56, 0.18);
+}
+
+.now-playing {
+  padding: 28px;
+  border: 1px solid #c6d0d0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 16px 36px rgba(41, 59, 61, 0.08);
+}
+
+.episode-meta {
+  min-height: 118px;
+}
+
+.episode-meta h2 {
+  margin: 8px 0 7px;
+  font-size: clamp(22px, 6vw, 30px);
+  line-height: 1.25;
+}
+
+#episode-topics {
+  color: #536064;
+  line-height: 1.5;
+}
+
+.playback {
+  gap: 20px;
+}
+
+.play-button {
+  flex: 0 0 54px;
+  width: 54px;
+  height: 54px;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: #d94b3d;
+  box-shadow: 0 8px 20px rgba(217, 75, 61, 0.24);
+}
+
+#play-icon {
+  display: inline-block;
+  margin-left: 2px;
+  font-size: 18px;
+}
+
+.timeline-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+#timeline {
+  width: 100%;
+  height: 5px;
+  margin: 0;
+  accent-color: #226a5c;
+}
+
+.time-row {
+  justify-content: space-between;
+  margin-top: 6px;
+  color: #687579;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.conversation {
+  margin-top: 22px;
+  padding: 26px 0 0;
+  border-top: 1px solid #bdc8c9;
+}
+
+.conversation-head {
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.conversation-head h2 {
+  margin: 4px 0 0;
+  font-size: 20px;
+}
+
+.mic-state {
+  min-width: 66px;
+  padding: 6px 9px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.mic-state.locked {
+  color: #687579;
+  background: #dce2e3;
+}
+
+.mic-state.ready {
+  color: #135246;
+  background: #cce9e1;
+}
+
+.mic-state.listening {
+  color: #8a241b;
+  background: #f7d8d4;
+}
+
+.dialogue {
+  min-height: 98px;
+  max-height: 310px;
+  overflow-y: auto;
+  padding: 2px 0 14px;
+}
+
+.system-message,
+.bubble {
+  width: fit-content;
+  max-width: min(88%, 590px);
+  margin: 0 0 10px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+.system-message,
+.bubble.answer {
+  color: #304145;
+  background: #fff;
+  border: 1px solid #ccd5d5;
+}
+
+.bubble.question {
+  margin-left: auto;
+  color: #fff;
+  background: #226a5c;
+}
+
+.question-bar {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  gap: 8px;
+  align-items: center;
+}
+
+.question-bar input,
+.question-bar button {
+  height: 44px;
+  border: 1px solid #b8c4c5;
+}
+
+.question-bar input {
+  min-width: 0;
+  padding: 0 14px;
+  border-radius: 6px;
+  color: #17202a;
+  background: #fff;
+}
+
+.question-bar button {
+  border-radius: 6px;
+  color: #fff;
+  background: #226a5c;
+  font-weight: 800;
+}
+
+.question-bar .icon-button {
+  color: #fff;
+  background: #d94b3d;
+  font-size: 16px;
+}
+
+.question-bar button:disabled,
+.question-bar input:disabled {
+  cursor: not-allowed;
+  color: #8d989a;
+  border-color: #d3dada;
+  background: #e4e9e9;
+}
+
+.question-bar input:focus-visible,
+.question-bar button:focus-visible,
+.audience:focus-visible,
+.play-button:focus-visible {
+  outline: 3px solid rgba(34, 106, 92, 0.25);
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 22px 16px 34px;
+  }
+
+  .now-playing {
+    padding: 22px 18px;
+  }
+
+  .episode-meta {
+    min-height: 125px;
+  }
+
+  .playback {
+    gap: 14px;
+  }
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>姐妹新闻电台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p id="episode-date" class="date">2026年6月23日</p>
+        <h1>姐妹新闻电台</h1>
+      </div>
+      <div class="live-mark" aria-label="今日节目">
+        <span></span>今日
+      </div>
+    </header>
+
+    <nav class="audience-switch" aria-label="选择节目">
+      <button class="audience active" data-version="sister" aria-pressed="true">
+        <strong>姐姐版</strong>
+        <span>11岁</span>
+      </button>
+      <button class="audience" data-version="younger" aria-pressed="false">
+        <strong>妹妹版</strong>
+        <span>8岁</span>
+      </button>
+    </nav>
+
+    <section class="now-playing" aria-labelledby="episode-title">
+      <div class="episode-meta">
+        <p id="edition-label">姐姐版 · 双人播客</p>
+        <h2 id="episode-title">能源通道与星际彗星</h2>
+        <p id="episode-topics">霍尔木兹海峡谈判 · 3I/ATLAS</p>
+      </div>
+
+      <div class="playback">
+        <button id="play-button" class="play-button" aria-label="播放">
+          <span id="play-icon">▶</span>
+        </button>
+        <div class="timeline-wrap">
+          <input id="timeline" type="range" min="0" max="100" value="0" step="0.1" aria-label="播放进度">
+          <div class="time-row">
+            <span id="current-time">0:00</span>
+            <span id="duration">2:20</span>
+          </div>
+        </div>
+      </div>
+      <audio id="podcast" preload="metadata"></audio>
+    </section>
+
+    <section class="conversation" aria-live="polite">
+      <div class="conversation-head">
+        <div>
+          <p class="section-label">节目互动</p>
+          <h2 id="conversation-title">播放时也可以随时提问</h2>
+        </div>
+        <div id="mic-state" class="mic-state ready">可提问</div>
+      </div>
+
+      <div id="dialogue" class="dialogue">
+        <p class="system-message">播放中提问时，节目会暂停，回答后继续。</p>
+      </div>
+
+      <form id="question-form" class="question-bar">
+        <button id="mic-button" class="icon-button" type="button" aria-label="语音提问" title="语音提问">●</button>
+        <input id="question-input" type="text" placeholder="输入问题，或点击麦克风" autocomplete="off" aria-label="输入问题">
+        <button id="send-button" type="submit" aria-label="发送问题" title="发送">↑</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
