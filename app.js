@@ -129,6 +129,7 @@ let recognition = null;
 let episodeFinished = false;
 let resumeAfterAnswer = false;
 let isListening = false;
+let recognitionStartTimer = null;
 
 function formatTime(value) {
   if (!Number.isFinite(value)) return "0:00";
@@ -270,6 +271,7 @@ function setupRecognition() {
   recognition.continuous = false;
 
   recognition.addEventListener("start", () => {
+    window.clearTimeout(recognitionStartTimer);
     isListening = true;
     micState.className = "mic-state listening";
     micState.textContent = "正在听";
@@ -282,6 +284,7 @@ function setupRecognition() {
   });
 
   recognition.addEventListener("end", () => {
+    window.clearTimeout(recognitionStartTimer);
     isListening = false;
     micState.className = "mic-state ready";
     micState.textContent = "可提问";
@@ -290,6 +293,7 @@ function setupRecognition() {
   });
 
   recognition.addEventListener("error", (event) => {
+    window.clearTimeout(recognitionStartTimer);
     const messages = {
       "not-allowed": "Safari 没有获得麦克风权限。请在系统设置的 Safari 中允许麦克风，然后刷新页面。",
       "service-not-allowed": "Safari 当前不允许网页语音识别。可以点击输入框，使用键盘上的听写麦克风。",
@@ -306,17 +310,23 @@ async function requestMicrophone() {
   if (!navigator.mediaDevices?.getUserMedia) return true;
 
   try {
+    micState.className = "mic-state listening";
+    micState.textContent = "申请权限";
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     stream.getTracks().forEach((track) => track.stop());
+    micState.className = "mic-state ready";
+    micState.textContent = "可提问";
     return true;
   } catch (error) {
     const denied = error?.name === "NotAllowedError" || error?.name === "SecurityError";
     addBubble(
       denied
-        ? "请允许 Safari 使用麦克风。若刚才选择了不允许，请到系统设置里的 Safari，打开麦克风权限后刷新页面。"
+        ? "请允许 Safari 使用麦克风。在 iPhone Safari 点地址栏左侧的页面菜单，打开“网站设置”，把麦克风改为“允许”，然后刷新页面。"
         : "暂时无法使用麦克风。可以点击输入框，使用键盘上的听写麦克风。",
       "answer"
     );
+    micState.className = "mic-state ready";
+    micState.textContent = "可提问";
     return false;
   }
 }
@@ -404,6 +414,16 @@ micButton.addEventListener("click", async () => {
 
   try {
     recognition.start();
+    recognitionStartTimer = window.setTimeout(() => {
+      if (isListening) return;
+      addBubble(
+        "Safari 没有启动网页语音识别。请点地址栏左侧的页面菜单，在“网站设置”里允许麦克风；如果仍无效，请点击输入框，使用键盘上的听写麦克风。",
+        "answer"
+      );
+      micState.className = "mic-state ready";
+      micState.textContent = "可提问";
+      resumeEpisode();
+    }, 2500);
   } catch {
     addBubble("麦克风正在准备中，请稍等一下再点击。", "answer");
     resumeEpisode();
