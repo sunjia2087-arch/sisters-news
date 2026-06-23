@@ -312,7 +312,16 @@ async function requestMicrophone() {
   try {
     micState.className = "mic-state listening";
     micState.textContent = "申请权限";
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const stream = await Promise.race([
+      navigator.mediaDevices.getUserMedia({ audio: true }),
+      new Promise((_, reject) => {
+        window.setTimeout(() => {
+          const error = new Error("Microphone permission timed out");
+          error.name = "TimeoutError";
+          reject(error);
+        }, 15000);
+      })
+    ]);
     stream.getTracks().forEach((track) => track.stop());
     micState.className = "mic-state ready";
     micState.textContent = "可提问";
@@ -322,7 +331,9 @@ async function requestMicrophone() {
     addBubble(
       denied
         ? "请允许 Safari 使用麦克风。在 iPhone Safari 点地址栏左侧的页面菜单，打开“网站设置”，把麦克风改为“允许”，然后刷新页面。"
-        : "暂时无法使用麦克风。可以点击输入框，使用键盘上的听写麦克风。",
+        : error?.name === "TimeoutError"
+          ? "Safari 没有弹出麦克风授权。请点地址栏左侧的页面菜单，在“网站设置”里把麦克风改为“允许”，然后刷新页面。"
+          : "暂时无法使用麦克风。可以点击输入框，使用键盘上的听写麦克风。",
       "answer"
     );
     micState.className = "mic-state ready";
