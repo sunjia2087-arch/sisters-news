@@ -121,6 +121,7 @@ const questionInput = document.querySelector("#question-input");
 const micButton = document.querySelector("#mic-button");
 const sendButton = document.querySelector("#send-button");
 const audienceButtons = [...document.querySelectorAll(".audience")];
+const answerAudio = new Audio();
 
 let version = "sister";
 let unlocked = true;
@@ -144,6 +145,16 @@ function speak(text, onEnd) {
   utterance.addEventListener("end", () => onEnd?.());
   utterance.addEventListener("error", () => onEnd?.());
   window.speechSynthesis.speak(utterance);
+}
+
+function playAnswer(text, audioPath, onEnd) {
+  window.speechSynthesis.cancel();
+  answerAudio.pause();
+  answerAudio.src = audioPath;
+  answerAudio.currentTime = 0;
+  answerAudio.onended = () => onEnd?.();
+  answerAudio.onerror = () => speak(text, onEnd);
+  answerAudio.play().catch(() => speak(text, onEnd));
 }
 
 function addBubble(text, kind) {
@@ -185,6 +196,7 @@ function loadEpisode(nextVersion) {
   episodeFinished = false;
   resumeAfterAnswer = false;
   window.speechSynthesis.cancel();
+  answerAudio.pause();
   audio.pause();
   audio.src = episode.audio;
   audio.load();
@@ -217,12 +229,15 @@ function findAnswer(question) {
       return total + (normalized.includes(term.toLowerCase().replace(/\s+/g, "")) ? term.length : 0);
     }, 0);
     if (score > bestScore) {
-      best = item.answer;
+      best = item;
       bestScore = score;
     }
   });
 
-  return best || episode.fallback;
+  return best || {
+    answer: episode.fallback,
+    audio: episode.fallbackAudio
+  };
 }
 
 function answerQuestion(question) {
@@ -233,8 +248,8 @@ function answerQuestion(question) {
   questionInput.value = "";
   const answer = findAnswer(cleanQuestion);
   window.setTimeout(() => {
-    addBubble(answer, "answer");
-    speak(answer, resumeEpisode);
+    addBubble(answer.answer, "answer");
+    playAnswer(answer.answer, answer.audio, resumeEpisode);
   }, 250);
 }
 
@@ -311,7 +326,7 @@ audio.addEventListener("ended", () => {
   conversationTitle.textContent = "你还有其他问题吗？";
   const greeting = episodes[version].greeting;
   addBubble(greeting, "answer");
-  speak(greeting);
+  playAnswer(greeting, episodes[version].greetingAudio);
   questionInput.focus();
 });
 
@@ -334,6 +349,7 @@ micButton.addEventListener("click", () => {
   if (!unlocked || !recognition) return;
   pauseForQuestion();
   window.speechSynthesis.cancel();
+  answerAudio.pause();
   recognition.start();
 });
 
