@@ -128,6 +128,7 @@ let unlocked = true;
 let recognition = null;
 let episodeFinished = false;
 let resumeAfterAnswer = false;
+let isListening = false;
 
 function formatTime(value) {
   if (!Number.isFinite(value)) return "0:00";
@@ -256,7 +257,9 @@ function answerQuestion(question) {
 function setupRecognition() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) {
-    micButton.hidden = true;
+    micButton.dataset.mode = "dictation";
+    micButton.title = "使用键盘听写";
+    micButton.setAttribute("aria-label", "使用键盘听写");
     return;
   }
 
@@ -264,11 +267,14 @@ function setupRecognition() {
   recognition.lang = "zh-CN";
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
+  recognition.continuous = false;
 
   recognition.addEventListener("start", () => {
+    isListening = true;
     micState.className = "mic-state listening";
     micState.textContent = "正在听";
     micButton.textContent = "■";
+    micButton.setAttribute("aria-label", "停止录音");
   });
 
   recognition.addEventListener("result", (event) => {
@@ -276,15 +282,43 @@ function setupRecognition() {
   });
 
   recognition.addEventListener("end", () => {
+    isListening = false;
     micState.className = "mic-state ready";
     micState.textContent = "可提问";
     micButton.textContent = "●";
+    micButton.setAttribute("aria-label", "语音提问");
   });
 
-  recognition.addEventListener("error", () => {
-    addBubble("没有听清楚。可以再说一次，或者在下面输入问题。", "answer");
+  recognition.addEventListener("error", (event) => {
+    const messages = {
+      "not-allowed": "Safari 没有获得麦克风权限。请在系统设置的 Safari 中允许麦克风，然后刷新页面。",
+      "service-not-allowed": "Safari 当前不允许网页语音识别。可以点击输入框，使用键盘上的听写麦克风。",
+      "audio-capture": "没有检测到可用的麦克风。请检查系统麦克风权限。",
+      "no-speech": "没有听到说话声，请靠近麦克风再试一次。",
+      "network": "语音识别服务暂时无法连接。可以点击输入框，使用键盘上的听写麦克风。"
+    };
+    addBubble(messages[event.error] || "没有听清楚。可以再说一次，或者在下面输入问题。", "answer");
     resumeEpisode();
   });
+}
+
+async function requestMicrophone() {
+  if (!navigator.mediaDevices?.getUserMedia) return true;
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    stream.getTracks().forEach((track) => track.stop());
+    return true;
+  } catch (error) {
+    const denied = error?.name === "NotAllowedError" || error?.name === "SecurityError";
+    addBubble(
+      denied
+        ? "请允许 Safari 使用麦克风。若刚才选择了不允许，请到系统设置里的 Safari，打开麦克风权限后刷新页面。"
+        : "暂时无法使用麦克风。可以点击输入框，使用键盘上的听写麦克风。",
+      "answer"
+    );
+    return false;
+  }
 }
 
 playButton.addEventListener("click", () => {
@@ -345,12 +379,35 @@ questionForm.addEventListener("submit", (event) => {
   if (unlocked) answerQuestion(questionInput.value);
 });
 
-micButton.addEventListener("click", () => {
-  if (!unlocked || !recognition) return;
+micButton.addEventListener("click", async () => {
+  if (!unlocked) return;
+
+  if (!recognition) {
+    questionInput.focus();
+    addBubble("当前 Safari 不支持网页直接录音识别。请点击键盘上的麦克风，说完后按发送。", "answer");
+    return;
+  }
+
+  if (isListening) {
+    recognition.stop();
+    return;
+  }
+
   pauseForQuestion();
   window.speechSynthesis.cancel();
   answerAudio.pause();
-  recognition.start();
+  const permitted = await requestMicrophone();
+  if (!permitted) {
+    resumeEpisode();
+    return;
+  }
+
+  try {
+    recognition.start();
+  } catch {
+    addBubble("麦克风正在准备中，请稍等一下再点击。", "answer");
+    resumeEpisode();
+  }
 });
 
 setupRecognition();
