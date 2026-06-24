@@ -1,107 +1,5 @@
-let episodes = {
-  sister: {
-    label: "姐姐版 · 双人播客",
-    title: "能源通道与SpaceX上市",
-    topics: "霍尔木兹海峡谈判 · 商业航天IPO",
-    audio: "latest_sister.mp3",
-    age: 11,
-    greeting: "姐姐，今天的新闻和开放式问题都听完了。你还有其他问题吗？",
-    fallback: "这个问题很有意思，但今天的新闻资料还不足以让我准确回答。我不想猜。可以请爸爸妈妈一起查一个可靠来源。",
-    answers: [
-      {
-        terms: ["霍尔木兹", "海峡", "通道", "在哪里"],
-        answer: "霍尔木兹海峡位于波斯湾出口附近，是连接波斯湾和阿拉伯海的重要水道。许多能源运输船要从这里经过，所以它是否畅通会影响多个国家。"
-      },
-      {
-        terms: ["油价", "石油", "能源", "涨价", "价格"],
-        answer: "如果重要航道受阻，市场会担心石油不能按时送到，供应可能变少。需求没有同时减少时，价格就容易上涨。恢复通行会减轻这种担心。"
-      },
-      {
-        terms: ["液化天然气", "天然气", "液化"],
-        answer: "液化天然气是把天然气降到很低的温度，让它变成液体。液体体积更小，更方便装进大型船只运到其他国家。"
-      },
-      {
-        terms: ["谈判", "协议", "信任", "美国", "伊朗"],
-        answer: "谈判的作用是让双方把要求、担心和可以接受的办法说清楚。一次会议不一定解决所有问题，但可以先建立规则，再通过检查和后续会议确认大家有没有遵守。"
-      },
-      {
-        terms: ["核查", "核问题", "核检查"],
-        answer: "国际核查人员会查看相关设施和记录，确认核材料是否按照协议使用。对各方来说，可验证的事实比只靠口头承诺更容易建立信任。"
-      },
-      {
-        terms: ["SpaceX", "spacex", "做什么", "什么公司"],
-        answer: "SpaceX是一家航天科技公司。它制造和发射火箭，用龙飞船运送宇航员和货物，研制星舰，还通过星链卫星提供互联网服务。"
-      },
-      {
-        terms: ["上市", "IPO", "首次公开募股", "股票"],
-        answer: "上市是指公司第一次把股票公开卖给投资者。股票代表公司的一小部分所有权。投资者可能分享公司成长的收益，也要承担价格下跌和项目失败的风险。"
-      },
-      {
-        terms: ["猎鹰", "火箭", "重复使用", "回收"],
-        answer: "SpaceX的猎鹰九号火箭可以让第一级完成任务后返回并着陆，经过检查后再次飞行。重复使用有机会减少制造新火箭的次数，从而降低发射成本。"
-      },
-      {
-        terms: ["龙飞船", "宇航员", "空间站"],
-        answer: "龙飞船是SpaceX制造的航天器，可以把宇航员或货物送到国际空间站。完成任务后，它还能返回地球。"
-      },
-      {
-        terms: ["星链", "卫星", "互联网"],
-        answer: "星链由许多在近地轨道运行的小卫星组成。它们把互联网信号传到地面，尤其可以服务没有方便地面网络的地区。"
-      },
-      {
-        terms: ["为什么重要", "影响", "商业航天", "投资"],
-        answer: "SpaceX上市说明商业航天已经成为资本市场中的重要产业。更多资金可能加快火箭和卫星技术发展，但公司也要面对投资者对收益、风险和进度的要求。"
-      }
-    ]
-  },
-  younger: {
-    label: "妹妹版 · 双人播客",
-    title: "世界杯与长寿蝴蝶",
-    topics: "48支球队 · Heliconius蝴蝶",
-    audio: "../daily_sisters_news_podcast_2026-06-23_younger_dialogue_v2.mp3",
-    age: 8,
-    greeting: "妹妹，今天的新闻和开放式问题都听完了。你还有其他问题吗？",
-    fallback: "这个问题很好。不过，今天的新闻没有告诉我们足够的信息。我先不乱猜。我们可以请爸爸妈妈一起查一查。",
-    answers: [
-      {
-        terms: ["世界杯", "什么时候", "开始"],
-        answer: "二零二六年世界杯从六月十一日开始，在美国、加拿大和墨西哥举行。它是第一次由三个国家一起主办。"
-      },
-      {
-        terms: ["四十八", "48", "多少球队", "几支", "队伍"],
-        answer: "这次有四十八支球队参加，比以前的三十二支更多。这样，一些以前很难进入世界杯的国家也有了机会。"
-      },
-      {
-        terms: ["三个国家", "一起主办", "为什么三个", "主办国"],
-        answer: "三个国家可以一起使用不同城市的球场，也能一起安排交通和接待球迷。不过，他们需要认真合作，才能让比赛顺利进行。"
-      },
-      {
-        terms: ["淘汰赛", "淘汰", "输了"],
-        answer: "淘汰赛里，获胜的球队继续比赛，输掉的球队离开这次比赛。球队一轮一轮比赛，最后选出冠军。"
-      },
-      {
-        terms: ["第一次", "新球队", "首次参加"],
-        answer: "有些国家的球队第一次来到世界杯。对这些球员和球迷来说，这是一次很特别的机会，也让更多地方的人能看到自己的球队。"
-      },
-      {
-        terms: ["蝴蝶", "Heliconius", "叫什么"],
-        answer: "这种蝴蝶叫Heliconius，生活在中美洲和南美洲的雨林里。它们是科学家研究长寿和变老过程的重要小帮手。"
-      },
-      {
-        terms: ["活多久", "一年", "长寿", "寿命"],
-        answer: "有些这种蝴蝶能活接近一年。和成年后只能活几个星期的一些蝴蝶相比，这已经很长了。"
-      },
-      {
-        terms: ["为什么长寿", "为什么活", "变老"],
-        answer: "科学家还没有找到全部答案。他们发现，这些蝴蝶会吃有营养的花粉，而且老了以后身体能力下降得比较慢。"
-      },
-      {
-        terms: ["花粉", "吃什么", "食物"],
-        answer: "花粉是花朵里的细小粉末，里面有营养。这种蝴蝶会吃花粉，科学家正在研究这是不是帮助它们活得更久。"
-      }
-    ]
-  }
-};
+let latestData = null;
+let episodes = {};
 
 const audio = document.querySelector("#podcast");
 const playButton = document.querySelector("#play-button");
@@ -121,15 +19,16 @@ const questionInput = document.querySelector("#question-input");
 const micButton = document.querySelector("#mic-button");
 const sendButton = document.querySelector("#send-button");
 const audienceButtons = [...document.querySelectorAll(".audience")];
-const answerAudio = new Audio();
 
 let version = "sister";
-let unlocked = true;
 let recognition = null;
 let episodeFinished = false;
 let resumeAfterAnswer = false;
 let isListening = false;
 let recognitionStartTimer = null;
+let browserTtsIndex = 0;
+let browserTtsPlaying = false;
+let browserTtsPaused = false;
 
 function formatTime(value) {
   if (!Number.isFinite(value)) return "0:00";
@@ -142,21 +41,16 @@ function speak(text, onEnd) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "zh-CN";
-  utterance.rate = 1;
+  utterance.rate = version === "younger" ? 1.03 : 1.05;
   utterance.pitch = version === "younger" ? 1.08 : 1;
   utterance.addEventListener("end", () => onEnd?.());
   utterance.addEventListener("error", () => onEnd?.());
   window.speechSynthesis.speak(utterance);
 }
 
-function playAnswer(text, audioPath, onEnd) {
-  window.speechSynthesis.cancel();
-  answerAudio.pause();
-  answerAudio.src = audioPath;
-  answerAudio.currentTime = 0;
-  answerAudio.onended = () => onEnd?.();
-  answerAudio.onerror = () => speak(text, onEnd);
-  answerAudio.play().catch(() => speak(text, onEnd));
+function setPlayState(playing) {
+  playIcon.textContent = playing ? "Ⅱ" : "▶";
+  playButton.setAttribute("aria-label", playing ? "暂停" : "播放");
 }
 
 function addBubble(text, kind) {
@@ -167,8 +61,7 @@ function addBubble(text, kind) {
   dialogue.scrollTop = dialogue.scrollHeight;
 }
 
-function setUnlocked(value) {
-  unlocked = value;
+function setInputsEnabled(value) {
   questionInput.disabled = !value;
   micButton.disabled = !value;
   sendButton.disabled = !value;
@@ -178,6 +71,14 @@ function setUnlocked(value) {
 }
 
 function pauseForQuestion() {
+  if (currentEpisode()?.audioMode === "browser-tts" && browserTtsPlaying) {
+    resumeAfterAnswer = true;
+    browserTtsPaused = true;
+    window.speechSynthesis.pause();
+    setPlayState(false);
+    return;
+  }
+
   if (!audio.paused && !audio.ended) {
     resumeAfterAnswer = true;
     audio.pause();
@@ -187,72 +88,188 @@ function pauseForQuestion() {
 function resumeEpisode() {
   if (!resumeAfterAnswer || episodeFinished) return;
   resumeAfterAnswer = false;
+  if (currentEpisode()?.audioMode === "browser-tts") {
+    browserTtsPaused = false;
+    browserTtsPlaying = true;
+    window.speechSynthesis.resume();
+    setPlayState(true);
+    return;
+  }
   audio.play().catch(() => {
     addBubble("点击播放按钮，可以从刚才的位置继续。", "answer");
   });
 }
 
+function currentEpisode() {
+  return episodes[version];
+}
+
+function contextSummary(episode) {
+  const titles = episode.stories.map((story) => story.title).join("；");
+  return `今天这一版的新闻上下文已经准备好：${titles}。`;
+}
+
+function finishEpisode() {
+  episodeFinished = true;
+  resumeAfterAnswer = false;
+  browserTtsPlaying = false;
+  browserTtsPaused = false;
+  playIcon.textContent = "↻";
+  playButton.setAttribute("aria-label", "重新播放");
+  conversationTitle.textContent = "开放问题回答";
+  const prompt = currentEpisode().completionPrompt;
+  addBubble(prompt, "answer");
+  speak(prompt);
+  questionInput.focus();
+}
+
+function speakBrowserTtsLine() {
+  const episode = currentEpisode();
+  const script = episode.ttsScript || [];
+  if (!browserTtsPlaying || browserTtsPaused) return;
+
+  if (browserTtsIndex >= script.length) {
+    finishEpisode();
+    return;
+  }
+
+  const line = script[browserTtsIndex];
+  const utterance = new SpeechSynthesisUtterance(line.text);
+  utterance.lang = "zh-CN";
+  utterance.rate = version === "younger" ? 1.03 : 1.05;
+  utterance.pitch = line.role === "新闻伙伴" ? 0.96 : 1.05;
+  utterance.addEventListener("end", () => {
+    browserTtsIndex += 1;
+    currentTime.textContent = `${Math.min(browserTtsIndex, script.length)}/${script.length}`;
+    timeline.value = script.length ? (browserTtsIndex / script.length) * 100 : 0;
+    speakBrowserTtsLine();
+  });
+  utterance.addEventListener("error", () => {
+    addBubble("浏览器朗读被中断了。可以再点一次播放继续。", "answer");
+    browserTtsPlaying = false;
+    setPlayState(false);
+  });
+  window.speechSynthesis.speak(utterance);
+}
+
+function playBrowserTts() {
+  const episode = currentEpisode();
+  if (!episode.ttsScript?.length) {
+    addBubble("今天的朗读稿没有加载成功，请稍后刷新页面。", "answer");
+    return;
+  }
+
+  if (browserTtsPlaying && browserTtsPaused) {
+    browserTtsPaused = false;
+    setPlayState(true);
+    window.speechSynthesis.resume();
+    return;
+  }
+
+  if (episodeFinished || browserTtsIndex >= episode.ttsScript.length) {
+    episodeFinished = false;
+    browserTtsIndex = 0;
+    timeline.value = 0;
+    currentTime.textContent = "0/0";
+  }
+
+  browserTtsPlaying = true;
+  browserTtsPaused = false;
+  setPlayState(true);
+  window.speechSynthesis.resume();
+  speakBrowserTtsLine();
+}
+
+function pauseBrowserTts() {
+  browserTtsPaused = true;
+  window.speechSynthesis.pause();
+  setPlayState(false);
+}
+
+async function requestDynamicAnswer(question) {
+  if (!latestData?.interaction?.dynamicBackendConfigured || !latestData?.interaction?.backendEndpoint) {
+    return {
+      answer: currentEpisode().backendUnavailableMessage,
+      dynamic: false
+    };
+  }
+
+  const response = await fetch(latestData.interaction.backendEndpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      version,
+      question,
+      episode: currentEpisode(),
+      interaction: latestData.interaction
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error("Dynamic backend request failed");
+  }
+
+  return response.json();
+}
+
+async function answerQuestion(question) {
+  const cleanQuestion = question.trim();
+  if (!cleanQuestion) return;
+
+  pauseForQuestion();
+  addBubble(cleanQuestion, "question");
+  questionInput.value = "";
+
+  try {
+    const result = await requestDynamicAnswer(cleanQuestion);
+    const answer = result.answer || currentEpisode().backendUnavailableMessage;
+    addBubble(answer, "answer");
+    speak(answer, resumeEpisode);
+  } catch {
+    const fallback = "动态互动后端暂时不可用。我不会猜答案。可以稍后再试，或继续播放节目。";
+    addBubble(fallback, "answer");
+    speak(fallback, resumeEpisode);
+  }
+}
+
 function loadEpisode(nextVersion) {
   version = nextVersion;
-  const episode = episodes[version];
+  const episode = currentEpisode();
   episodeFinished = false;
   resumeAfterAnswer = false;
   window.speechSynthesis.cancel();
-  answerAudio.pause();
+  browserTtsIndex = 0;
+  browserTtsPlaying = false;
+  browserTtsPaused = false;
   audio.pause();
-  audio.src = episode.audio;
-  audio.load();
-  playIcon.textContent = "▶";
-  playButton.setAttribute("aria-label", "播放");
+  if (episode.audioMode === "browser-tts") {
+    audio.removeAttribute("src");
+    audio.load();
+    duration.textContent = episode.ttsScript?.length ? `${episode.ttsScript.length}句` : "朗读";
+  } else {
+    audio.src = episode.audio;
+    audio.load();
+  }
+  setPlayState(false);
   timeline.value = 0;
-  currentTime.textContent = "0:00";
+  currentTime.textContent = episode.audioMode === "browser-tts" ? "0/0" : "0:00";
   editionLabel.textContent = episode.label;
   episodeTitle.textContent = episode.title;
   episodeTopics.textContent = episode.topics;
-  dialogue.innerHTML = '<p class="system-message">播放中提问时，节目会暂停，回答后继续。</p>';
   conversationTitle.textContent = "播放时也可以随时提问";
-  setUnlocked(true);
+  dialogue.innerHTML = "";
+  addBubble("播放中提问时，节目会暂停。当前未配置安全动态后端，页面不会用关键词预设答案冒充理解。", "system-message");
+  if (episode.audioMode === "browser-tts") {
+    addBubble("今天使用浏览器中文朗读播放，音色会跟设备有关。", "system-message");
+  }
+  addBubble(contextSummary(episode), "system-message");
+  setInputsEnabled(true);
 
   audienceButtons.forEach((button) => {
     const active = button.dataset.version === version;
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", String(active));
   });
-}
-
-function findAnswer(question) {
-  const normalized = question.toLowerCase().replace(/\s+/g, "");
-  const episode = episodes[version];
-  let best = null;
-  let bestScore = 0;
-
-  episode.answers.forEach((item) => {
-    const score = item.terms.reduce((total, term) => {
-      return total + (normalized.includes(term.toLowerCase().replace(/\s+/g, "")) ? term.length : 0);
-    }, 0);
-    if (score > bestScore) {
-      best = item;
-      bestScore = score;
-    }
-  });
-
-  return best || {
-    answer: episode.fallback,
-    audio: episode.fallbackAudio
-  };
-}
-
-function answerQuestion(question) {
-  const cleanQuestion = question.trim();
-  if (!cleanQuestion) return;
-  pauseForQuestion();
-  addBubble(cleanQuestion, "question");
-  questionInput.value = "";
-  const answer = findAnswer(cleanQuestion);
-  window.setTimeout(() => {
-    addBubble(answer.answer, "answer");
-    playAnswer(answer.answer, answer.audio, resumeEpisode);
-  }, 250);
 }
 
 function setupRecognition() {
@@ -295,11 +312,11 @@ function setupRecognition() {
   recognition.addEventListener("error", (event) => {
     window.clearTimeout(recognitionStartTimer);
     const messages = {
-      "not-allowed": "Safari 没有获得麦克风权限。请在系统设置的 Safari 中允许麦克风，然后刷新页面。",
-      "service-not-allowed": "Safari 当前不允许网页语音识别。可以点击输入框，使用键盘上的听写麦克风。",
-      "audio-capture": "没有检测到可用的麦克风。请检查系统麦克风权限。",
+      "not-allowed": "浏览器没有获得麦克风权限。可以在浏览器设置中允许麦克风，或直接输入文字。",
+      "service-not-allowed": "浏览器当前不允许网页语音识别。可以点击输入框，使用键盘听写。",
+      "audio-capture": "没有检测到可用麦克风。请检查系统麦克风权限。",
       "no-speech": "没有听到说话声，请靠近麦克风再试一次。",
-      "network": "语音识别服务暂时无法连接。可以点击输入框，使用键盘上的听写麦克风。"
+      "network": "语音识别服务暂时无法连接。可以直接输入文字。"
     };
     addBubble(messages[event.error] || "没有听清楚。可以再说一次，或者在下面输入问题。", "answer");
     resumeEpisode();
@@ -326,16 +343,8 @@ async function requestMicrophone() {
     micState.className = "mic-state ready";
     micState.textContent = "可提问";
     return true;
-  } catch (error) {
-    const denied = error?.name === "NotAllowedError" || error?.name === "SecurityError";
-    addBubble(
-      denied
-        ? "请允许 Safari 使用麦克风。在 iPhone Safari 点地址栏左侧的页面菜单，打开“网站设置”，把麦克风改为“允许”，然后刷新页面。"
-        : error?.name === "TimeoutError"
-          ? "Safari 没有弹出麦克风授权。请点地址栏左侧的页面菜单，在“网站设置”里把麦克风改为“允许”，然后刷新页面。"
-          : "暂时无法使用麦克风。可以点击输入框，使用键盘上的听写麦克风。",
-      "answer"
-    );
+  } catch {
+    addBubble("暂时无法使用麦克风。可以点击输入框，使用键盘输入或听写。", "answer");
     micState.className = "mic-state ready";
     micState.textContent = "可提问";
     return false;
@@ -343,7 +352,17 @@ async function requestMicrophone() {
 }
 
 playButton.addEventListener("click", () => {
+  if (currentEpisode()?.audioMode === "browser-tts") {
+    if (browserTtsPlaying && !browserTtsPaused) {
+      pauseBrowserTts();
+    } else {
+      playBrowserTts();
+    }
+    return;
+  }
+
   if (audio.paused) {
+    if (audio.ended) audio.currentTime = 0;
     audio.play().catch(() => {
       addBubble("音频暂时没有开始，请再点一次播放。", "answer");
     });
@@ -353,14 +372,12 @@ playButton.addEventListener("click", () => {
 });
 
 audio.addEventListener("play", () => {
-  playIcon.textContent = "Ⅱ";
-  playButton.setAttribute("aria-label", "暂停");
+  setPlayState(true);
 });
 
 audio.addEventListener("pause", () => {
   if (!audio.ended) {
-    playIcon.textContent = "▶";
-    playButton.setAttribute("aria-label", "播放");
+    setPlayState(false);
   }
 });
 
@@ -374,15 +391,7 @@ audio.addEventListener("timeupdate", () => {
 });
 
 audio.addEventListener("ended", () => {
-  episodeFinished = true;
-  resumeAfterAnswer = false;
-  playIcon.textContent = "↻";
-  playButton.setAttribute("aria-label", "重新播放");
-  conversationTitle.textContent = "你还有其他问题吗？";
-  const greeting = episodes[version].greeting;
-  addBubble(greeting, "answer");
-  playAnswer(greeting, episodes[version].greetingAudio);
-  questionInput.focus();
+  finishEpisode();
 });
 
 timeline.addEventListener("input", () => {
@@ -397,15 +406,13 @@ audienceButtons.forEach((button) => {
 
 questionForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (unlocked) answerQuestion(questionInput.value);
+  answerQuestion(questionInput.value);
 });
 
 micButton.addEventListener("click", async () => {
-  if (!unlocked) return;
-
   if (!recognition) {
     questionInput.focus();
-    addBubble("当前 Safari 不支持网页直接录音识别。请点击键盘上的麦克风，说完后按发送。", "answer");
+    addBubble("当前浏览器不支持网页直接录音识别。请点击输入框，使用键盘听写或输入文字。", "answer");
     return;
   }
 
@@ -416,7 +423,6 @@ micButton.addEventListener("click", async () => {
 
   pauseForQuestion();
   window.speechSynthesis.cancel();
-  answerAudio.pause();
   const permitted = await requestMicrophone();
   if (!permitted) {
     resumeEpisode();
@@ -427,10 +433,7 @@ micButton.addEventListener("click", async () => {
     recognition.start();
     recognitionStartTimer = window.setTimeout(() => {
       if (isListening) return;
-      addBubble(
-        "Safari 没有启动网页语音识别。请点地址栏左侧的页面菜单，在“网站设置”里允许麦克风；如果仍无效，请点击输入框，使用键盘上的听写麦克风。",
-        "answer"
-      );
+      addBubble("浏览器没有启动语音识别。可以直接输入文字。", "answer");
       micState.className = "mic-state ready";
       micState.textContent = "可提问";
       resumeEpisode();
@@ -444,23 +447,16 @@ micButton.addEventListener("click", async () => {
 setupRecognition();
 
 async function initialize() {
+  setInputsEnabled(false);
   try {
     const response = await fetch(`latest.json?ts=${Date.now()}`, { cache: "no-store" });
-    if (response.ok) {
-      const latest = await response.json();
-      episodes = latest.episodes;
-      episodeDate.textContent = latest.displayDate;
-    }
+    if (!response.ok) throw new Error("latest.json request failed");
+    latestData = await response.json();
+    episodes = latestData.episodes;
+    episodeDate.textContent = latestData.displayDate;
+    loadEpisode(version);
   } catch {
-    // The embedded episode remains available when opened without a web server.
-  }
-
-  loadEpisode(version);
-
-  if (new URLSearchParams(window.location.search).has("questions")) {
-    episodeFinished = true;
-    conversationTitle.textContent = "你还有其他问题吗？";
-    addBubble(episodes[version].greeting, "answer");
+    addBubble("没有加载到今日节目数据。请稍后刷新页面。", "answer");
   }
 }
 
